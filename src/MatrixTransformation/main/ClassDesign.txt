@@ -1,0 +1,46 @@
+    Package MatrixTransformation.main only contains the driver file, MatrixTransformation.  I put it by itself as it calls on almost
+all of the other classes contained in MatrixTransformation.util.  This package name should also make it easy for someone to find the
+main file.  I also put ClassDesign.txt here so it would be easy to find an explanation of everything I did and why.
+
+    MatrixTransformation is the main driver class that runs the application.  First, it sets up the GUI and creates a keyboard and mouse
+object by using the KeyboardInput and RelativeMouseInput classes.  Next, it creates the VectorObjects.  These are a series of points that
+are stored in a array.  They are represented as shapes on the screen and can be collectively changed to change the appearance of the
+object.  Then, the game loop is started.  First, it gets user input from the mouse and keyboard.  Then, it applies any changes to the
+objects the user made by clicking or typing.  Finally, it displays these objects to the screen by rendering them.  The game loop repeats
+itself until the application is closed.
+
+    This is ClassDesign.txt, a text file explaining what I do in each of my classes and packages and why I organized them in this way.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Package MatrixTransformation.util contains classes used directly by MatrixTransformation.  KeyboardInput lets the main class create
+an instance of a keyboard to read in user input.  RelativeMouseInput does the same for a mouse.  VectorObject lets the main class
+create an instance of a series of points that can be manipulated to change the object they form in different ways.  The main class
+directly creates instances of each of these classes to help it run, which is why I grouped these all together in a package called
+MatrixTransformation.util.
+
+    When we creates instances of KeyboardInput and RelativeMouseInput, we can use them to get input from those respective tools that the
+user gives them.  The keyboard is used to move and change the hex VectorObject and the mouse is used to move and change the triangle
+VectorObject.  These classes were both provided and are left unchanged.
+
+    VectorObject is a class that stores a series of points as an array and performs operations on them in a plane.  It is given screen
+coordinates, but then converts them to 'world' coordinates as well as stores the width and height of the shape those points form when
+connected.  World coordinates just center the x and y axes to the middle of the window and standardize them (i.e. increasing numbers go
+up and right).  After initializing some tracking variables, the object is ready.  We will call its methods in our main game loop.  First,
+while processing input, we track any changes we want to make to the object by calling one of the 4 methods: translate, rotate, scale, or
+shear.  Next, we'll update all our objects by calling updateWorld, which will save any of those changes we made into the world array.
+Finally, we'll call render for each VectorObject we have which will print the points connected by lines to the screen.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Package MatrixTransformation.vector contains all the helper classes used by VectorObject.  These help make and store the changes we
+make to the original points for each object, allowing us to easily manipulate it as we wish.
+
+    Drawable is an interface that VectorObject inherits from and Matrix3x3f and Vector2f are classes that help VectorObject.  These were
+all provided and are left unchanged from the originals.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Every mentioned package is in the highest level package, MatrixTransformation, which is the name of the application.
+
+-Al Ohlinger
